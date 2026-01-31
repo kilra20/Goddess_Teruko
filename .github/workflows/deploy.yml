@@ -45,11 +45,9 @@ jobs:
           set -eux
           npm run build
 
-      - name: Export static site
-        run: npm run export
-
       - name: Debug: out directory
         run: |
+          echo "note: Next is configured with output: 'export' in next.config.ts; running 'next build' should produce ./out"
           echo "out exists:" && [ -d out ] && echo yes || echo no
           ls -la out || true
 
