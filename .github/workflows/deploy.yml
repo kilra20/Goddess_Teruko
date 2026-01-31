@@ -14,7 +14,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -25,31 +25,11 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Debug: Node & NPM versions
-        run: |
-          node --version
-          npm --version
-          npx --version
-
-      - name: Debug: repo files
-        run: |
-          ls -la
-          echo "package.json:" && cat package.json
-          echo "pwd: $(pwd)"
-
       - name: Install dependencies
         run: npm install
 
       - name: Build
-        run: |
-          set -eux
-          npm run build
-
-      - name: Debug: out directory
-        run: |
-          echo "note: Next is configured with output: 'export' in next.config.ts; running 'next build' should produce ./out"
-          echo "out exists:" && [ -d out ] && echo yes || echo no
-          ls -la out || true
+        run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
